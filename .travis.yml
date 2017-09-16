@@ -102,7 +102,7 @@ jobs:
     env:
       - PROJECT=$(basename $TRAVIS_BUILD_DIR)
       - JEKYLL_BASEURL=\/$PROJECT
-      - BLOG_DEPLOY_TEST_URL=https://nolte.github.io/jekyll-boilerplate/
+      - BLOG_DEPLOY_TEST_URL=https://nolte.github.io/noltarium-blog/
       - GITHUB_PAGE_DIR=/tmp/ghpage
     deploy:
       # only executed on master branch
