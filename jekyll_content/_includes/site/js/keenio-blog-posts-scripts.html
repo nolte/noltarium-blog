@@ -125,5 +125,79 @@
 
     });
 
+    Keen.ready(function() {
+      var el = document.getElementById("docker-push-count");
+      var chart = new Keen.Dataviz()
+        .el(el)
+        .chartType('metric')
+        .title('Docker Hub Activities Last (14d)')
+        .prepare();
+
+      client
+        .query("count", {
+          event_collection: "dockerhub",
+          timeframe: "this_14_years",
+          timezone: "UTC"
+        })
+        .then(function(res) {
+          chart.data(res).render();
+        })
+        .catch(function(err) {
+          chart.message(err.message);
+        });
+
+    });
+
+    Keen.ready(function() {
+      var el = document.getElementById("docker-push-count-unique");
+      var chart = new Keen.Dataviz()
+        .el(el)
+        .chartType('metric')
+        .title('Active Projects Last (14d)')
+        .prepare();
+
+      client
+        .query("count_unique", {
+          event_collection: "dockerhub",
+          target_property: "repository.repo_name",
+          timeframe: "this_14_years",
+          timezone: "UTC"
+        })
+        .then(function(res) {
+          chart.data(res).render();
+        })
+        .catch(function(err) {
+          chart.message(err.message);
+        });
+
+    });
+    Keen.ready(function() {
+      var el = document.getElementById("docker-push-count-presentation");
+      var chart = new Keen.Dataviz()
+        .el(el)
+        .chartType('metric')
+        .title('Presentation pushs Last (14d)')
+        .prepare();
+
+      client
+        .query("count", {
+          event_collection: "dockerhub",
+          filters: [{
+            "operator": "eq",
+            "property_name": "repository.repo_name",
+            "property_value": "nolte/bog.noltarium.de"
+          }],
+          timeframe: "this_14_years",
+          timezone: "UTC"
+        })
+        .then(function(res) {
+          chart.data(res).render();
+        })
+        .catch(function(err) {
+          chart.message(err.message);
+        });
+
+    });
+
   });
 </script>
