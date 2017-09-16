@@ -1,0 +1,129 @@
+<script>
+  $(document).ready(function() {
+
+    var client = new Keen({
+      projectId: "{{ site.keen_projectId }}",
+      readKey: "{{ site.keen_api_readKey }}"
+    });
+
+    Keen.ready(function() {
+      var el = document.getElementById("git-jekyll-site-master-push-count");
+      var chart = new Keen.Dataviz()
+        .el(el)
+        .chartType('metric')
+        .title('on Master Last (14d)')
+        .prepare();
+
+      client
+        .query("count", {
+          event_collection: "commit",
+          filters: [{
+              "operator": "eq",
+              "property_name": "repository.id",
+              "property_value": {{site.keen_github_project_id}}
+            },
+            {
+              "operator": "eq",
+              "property_name": "ref",
+              "property_value": "refs/heads/master"
+            }
+          ],
+          timeframe: "this_14_days",
+          timezone: "Europe/Paris"
+        })
+        .then(function(res) {
+          chart.data(res).render();
+        })
+        .catch(function(err) {
+          chart.message(err.message);
+        });
+
+    });
+
+    Keen.ready(function() {
+      var el = document.getElementById("git-jekyll-site-not-master-push-count");
+      var chart = new Keen.Dataviz()
+        .el(el)
+        .chartType('metric')
+        .title('other commits Last (14d)')
+        .prepare();
+
+      client
+        .query("count", {
+          event_collection: "commit",
+          filters: [{
+              "operator": "eq",
+              "property_name": "repository.id",
+              "property_value": {{site.keen_github_project_id}}
+            },
+            {
+              "operator": "ne",
+              "property_name": "ref",
+              "property_value": "refs/heads/master"
+            }
+          ],
+          timeframe: "this_14_days",
+          timezone: "Europe/Paris"
+        })
+        .then(function(res) {
+          chart.data(res).render();
+        })
+        .catch(function(err) {
+          chart.message(err.message);
+        });
+
+    });
+    Keen.ready(function() {
+      var el = document.getElementById("git-push-count");
+      var chart = new Keen.Dataviz()
+        .el(el)
+        .chartType('metric')
+        .title('all pushs Last (14d)')
+        .prepare();
+
+      client
+        .query("count", {
+          event_collection: "commit",
+          timeframe: "this_14_days",
+          timezone: "Europe/Paris"
+        })
+        .then(function(res) {
+          chart.data(res).render();
+        })
+        .catch(function(err) {
+          chart.message(err.message);
+        });
+
+    });
+
+    Keen.ready(function() {
+      var el = document.getElementById("git-jekyll-site-branch-push-count");
+      var chart = new Keen.Dataviz()
+        .el(el)
+        .chartType('metric')
+        .title('Active Branches Last (14d)')
+        .prepare();
+
+      client
+        .query("count_unique", {
+          event_collection: "commit",
+          filters: [{
+            "operator": "eq",
+            "property_name": "repository.id",
+            "property_value": {{site.keen_github_project_id}}
+          }],
+          target_property: "ref",
+          timeframe: "this_14_years",
+          timezone: "UTC"
+        })
+        .then(function(res) {
+          chart.data(res).render();
+        })
+        .catch(function(err) {
+          chart.message(err.message);
+        });
+
+    });
+
+  });
+</script>

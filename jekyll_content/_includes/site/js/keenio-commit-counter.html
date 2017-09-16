@@ -1,0 +1,61 @@
+<script>
+  $(document).ready(function() {
+
+    var client = new Keen({
+      projectId: "{{ site.keen_projectId }}",
+      readKey: "{{ site.keen_api_readKey }}"
+    });
+
+    Keen.ready(function() {
+      var el = document.getElementById("count-github-pages-deployments");
+      var chart = new Keen.Dataviz()
+        .el(el)
+        .chartType('metric')
+        .title('Github Page Deployments last (14d)')
+        .prepare();
+
+      client
+        .query("count", {
+          event_collection: "commit",
+          filters: [{
+            "operator": "eq",
+            "property_name": "ref",
+            "property_value": "refs/heads/gh-pages"
+          }, {
+            "operator": "eq",
+            "property_name": "repository.id",
+            "property_value": {{site.keen_github_project_id}}
+          }],
+          timeframe: "this_14_days",
+          timezone: "Europe/Paris"
+        })
+        .then(function(res) {
+          chart.data(res).render();
+        })
+        .catch(function(err) {
+          chart.message(err.message);
+        });
+
+      var chartActiveProjects = new Keen.Dataviz()
+        .el("#count-github-active-projects")
+        .title("Active Projects")
+        .type("metric")
+        .prepare();
+
+      client
+        .query("count_unique", {
+          event_collection: "commit",
+          target_property: "repository.id",
+          timeframe: "this_14_days",
+          timezone: "Europe/Paris"
+        })
+        .then(function(res) {
+          chartActiveProjects.data(res).render();
+        })
+        .catch(function(err) {
+          chartActiveProjects.message(err.message);
+        });
+    });
+
+  });
+</script>
