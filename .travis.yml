@@ -1,0 +1,110 @@
+language: ruby
+dist: trusty
+sudo: required
+jdk:
+- openjdk8
+rvm:
+- 2.4.1
+
+env:
+  global:
+  - TRAVISCI_SCRIPT_DIR=/tmp/ci_scripts
+  - PLANTUML_VERSION=1.2017.15
+  - GENERATED_FILE_BRANCH_NAME=tmp_generated
+  - GENERATED_FILE_BRANCH_COMMIT_MSG=travisBuild
+  - GENERATED_FILE_BRANCH_DIR=/tmp/heroku_app
+  - secure: nbjOqHDSS0kxigXy1qAto8letpVqj2L9AezaZnwgndUW4D1zyv/57ajX3U0SPzRP+FS1MjzvjWJsWuqcLvNWNeWeme4ZxtqPQw7UGUYpfunoHLgbmG2rCjJicvAUVZbLK3wtfe0qPJvcetgpV7bOUsfS+M+QOJvnCHvoTD1Lx5be8zWYn3ZPX2nydq/EVatJM9ctqDY6BSgiqFVulYseeaeEnsMbPnPIh7CDBIu9za1skiS81ouq4PkXR6rWdf+Ppix7H9WilMCndtOTY6//XuMx54ofRpnCjAPZCdHJmNlXfrgSiEUcIaxbju6WyMVaNd/OuwnNez/CtMnkH6I9a+ETN7S6FIwkJNvGAKQjAnbRZDO2ItovRc36vEASm6xpEIJLM/2W/4496jjFaGawb7PiTaMwW35OD7FMg1/8DWXQVyaTHleS7oGrL9uTvDKSQvIOK6q8I8Z2plQleVgJXiv/rAPOctrwnGLbyrDHeND07Mss9nPPFEcrdKeTOaCJazO9U7GjUE0ngCkPzqI1owY+ES9NuksSm2bhjrbp4gEPij8sX2dysbL5CGV95CHQg7t+a2LZ9WEiKvHX0DUHqwR++G/78BGsYrrQaq4MSvv18WKahMBs0yhkxfBmJHIFzzDJzpawrY7L0hHSvpiA9mCaJRI658ESrWCywZ2Fjhs=
+
+# install dependencies and prepare build structure
+before_install:
+  # copy build scripts to tmp folder for the tavis.yml
+  - mkdir -p $TRAVISCI_SCRIPT_DIR
+  - cp -r $TRAVIS_BUILD_DIR/ci_scripts/* $TRAVISCI_SCRIPT_DIR
+  - chmod u+x $TRAVISCI_SCRIPT_DIR/*
+  # install system build dependencies
+  - "$TRAVISCI_SCRIPT_DIR/prepare_system_dependency.sh"
+
+install:
+  - bundle install --gemfile=$TRAVIS_BUILD_DIR/jekyll_content/Gemfile
+
+script:
+  - cd $TRAVIS_BUILD_DIR/jekyll_content
+  - bundle exec rake html_proofer
+  - cd $TRAVIS_BUILD_DIR
+
+# create a branch with generated static jekyll files
+after_success:
+  - "$TRAVISCI_SCRIPT_DIR/prepare_generated_files_branch.sh"
+
+# execute selenium integration tests
+after_deploy:
+  - cd $TRAVIS_BUILD_DIR
+  - git checkout $TRAVIS_BRANCH
+  - cd $TRAVIS_BUILD_DIR/integration_test
+  - bundle install
+  - bundle exec rake test
+
+notifications:
+  slack:
+    secure: SJ4U9hM9rVY/4WuaDE/yroDlhruzcfnIkdfpXXG02sVLX/iEoR0/ioOAseQ/s1MagFV4cINc2c4OfNpgEbbl7iyKZwKmx9ijlV+G6JYc+1wP+LJpnwzywoJMtfbE0ZTFoxDBr97nveeNQHNgaxhlRXHGegBjIb1Im4hyoDsjGZoj34l5ssss4me/NCXl7Ig93FyA1ju8cPO6D8DEtRdObxctMZOHg7cc7Z7Qd0pdKr4S9o4bSpfGJucCxjUkrLEJc3X7pUT9TXO6Dj3VPMkjSMGFDMXaWzzWGgfp0dkgSLKUVLCJJHUwvdPZzAoYvpL7h6FQaQNoS/7SrhBybXllXaYXhd90nUHUyiWgPSzo9RwzzkmwCLrQR73iB7WpwXxfVPZcWbLfNqJ7QMaU/66X86CN308CoKVpcP8niHcNIy4115AjxdUzT7osV1ikrNp2l+W/2rDGXmQhO0lvJTWRlYOdjLST6DxhV3/xFx9PeA8nma1d480QMvEYjzhGyXxqjqy3Mn9lGJVChi7jkE0oUEs0DGeZWOP3ThAFrJtxYvOSX8bFkcI1FwHqEhBypWzGN/OL5TEWBFZ9VAJBGe7Q1V7qQ+T8L6ZNiWk7uV9hRLaUkzwGUcls+tdlSn5O5YdNDQc5hXGmVZ69BjC/QbdulVCVSONo5ZfvgnjqgnrJ0jQ=
+jobs:
+  include:
+  # Build the Jekyll blog as Heroku App
+  - stage: Development
+    env:
+      - JEKYLL_BASEURL=
+      - HEROKU_APP_NAME=noltarium-blog-development
+      - BLOG_DEPLOY_TEST_URL=https://$HEROKU_APP_NAME.herokuapp.com/
+    before_deploy:
+      - "$TRAVISCI_SCRIPT_DIR/prepare_heroku_deployment.sh"
+      - git checkout herokuapp
+    deploy:
+      - provider: heroku
+        api_key:
+          secure: OE/OiyViWWiyun0R0Fov5g4/RTPxNqSmV03YpWnD2KTVAsSXxkfsDIyUzzPLTpkhINDC0QY1QvHS9My76+ncPhBI8WlgH+KEy6enDkGAFof2ofFEG0a20o622wVIdPncndhstsVkoCezeU2oceuMPYnTRqcpUEUrsjHxA1Z8g1WIE5GygagobMcUf+xlX338IrraICimoYfNqCn1Yw5DDwYKchnjymb8matJzipSWK8X40vT0S8nUjMudXqXlE9YeOzIBCM+rGt5GsJUE0mhDIilC7vVUVI7L54fv4L7GeWlXngsRsyCtJbgW10BYB2p+rqDnUFiHaCUwnubewQxp8iB/IR3VrH4x7K0ANy/jr+Dr7OCU21ERBEjzg/mYZkBNShsaSgMj4ZKex5dFvySDNyOEiJUGgOubab/iMhaFACzZ5QEBMxnvZ76BrE3QKKF5sK4z8JTNDA1PXXNi1eYybmowrBhlex4unoRAVSXMnnE9iq/Rvw/UdNvViZU1Pg5U2CwkKyLhaIbO+ewBse7gAXLZSzEqfeQtzxbGkvNdnAhMAWrSYbBx8EE4vABzTjOxvYOA3O72vgpD9FQYjsiq3DJPyXGNGP3aAXjLPJ6DyxMl40pETjOIckJrCSTw/Ixd01goB+xtD3PsE2smmIWOsmwEH2O2y7FOk8lnrbPsn8=
+        app: $HEROKU_APP_NAME
+        on:
+          all_branches: true
+  - env:
+      - secure: "LVHQeVckgLfgnqeXEwdDxIM3j4R8MZp7XD3rIs3ImDK6sP2maUzHrvq0PqOu6EYW5OGiQb2nNE8qFGEZK3IgRtAE532HOIBOuQASATuqArAgq5mnfOt/nEz1gkZ5FWZFdn9fbucfkagdozC2QVkzimV5t41TMqan4s2VLxxMMcbNQIuSgMaMv+/rJ1fzT2K2SoiWte6vgCLBaGC32Dh2JN/ectbsKGf7fRxSVF0V0z112eC4mqURDb6aWZcLZENH2xYUHynXIK7e0q0N9dvg4kMHSXjsfKSdZisNuFXVLjhOh3X0qCEe+a6gTaWhcvp3iZRR3XWGIRYL5tA4E9np4PQ1y/G6Q7O+4lGPW/5Wt0K92l3+hhD2r0zLIoh6i847Gcyi8IpA0ULIVQ70vq7FN32XfWSJaOWI31ViW0YfW27NZUShgA+pPGwrQZpt8K4rpbhX6BMB/QJRAY5jmtYHzI8px3R5U6D5zC0ev0xDa7DkPd76xvanPnEAAJwHPXepvcGgSwAq9/qnefP4kv8iHMgRK8ftaH6JdBHnG1hYHNLtJHTfP7A8MC0wY7/R3D3w+CyzBa5IB2oHO+PBpwWwWJhTgvI6D1cQ1AERxwCg8yUdJTx/zwPATZe7cH5Y/Yu0BQGQI0kD7YNUNg3k8gad6yIOY/mVQaRdXoiXtFJOwTw="
+      - secure: "NLwrC4LQUZIxHXcFlp9IrD5oAtHNuRasqGsF4ID329zSJQUGSWvtCaPdAiJqC8MkXYMLJVCceJf6qnL1YeSWR1Lt+nHJyqA4R7ygm1T0lHcalgFSJ3OP1pmhNsVlolLIUE1Xq4YrJksjqtReLeaJqwh/ED4kPFtx+SzI8Vbo2AcQqHdWho3+q5By+hyvUcfsYbsCcUUxIz6aH4y1fpAz1X5+W5OmFCoz+IflPePqv04vXJIfgsERNj5EeDqW4wIJzsK0rQiHtT8CVvHP72+hO6zpdxTgNYWmKY1Tc+vXzBTh1ZbAM2rkZAV4ub71NbO06ag5gmRisYl3fd/7X4H8XOkLbJG2Tnqm5r/c+JKNoknr/BO4UBkLTUKfWql6+17O8fFzx/d/vBiaJKsR4/EIAnnuGl7obmTDZPHnjZilMX7pf0g0a7niOr3cWquroamKWPFhKxTrauKgGd7H5A7fCDvGC/uThNICZ7JZlZxvneaWAogvj37aQruIiJasNPU7ONF8HrQWprp1o38SjrtWgkVOlDxSnntKdZ1WqJThXLR/epWT/Zb9T/PS914u9NUUmsHRFoGt7/ya6xJVpFDkStUuwSsaZqnFuLBOV8GM2eRitQS+w/yGuA3ci0eBsmzKUK2Q+LPG2csGLf/2m1DvmbsHuwlL21VTFMskVQC21zI="
+      - DOCKER_HUB_IMAGE_NAME=bog.noltarium.de
+    services:
+      - docker
+    before_deploy:
+      - "$TRAVISCI_SCRIPT_DIR/prepare_docker_nginx_deployment.sh"
+      - git checkout dockernginx
+    deploy:
+          - provider: script
+            script: $TRAVISCI_SCRIPT_DIR/deploy_to_dockerhub.sh latest
+            on:
+              branch: master
+          - provider: script
+            script: $TRAVISCI_SCRIPT_DIR/deploy_to_dockerhub.sh development
+            on:
+              branch: development
+
+  - stage: build in docker
+    env:
+      - JEKYLL_BASEURL=
+    services:
+      - docker
+    before_install: skip
+    install: docker build -t jekyll-boilerplate .
+    script: docker run -v $(pwd)/jekyll_content:/jekyll_content jekyll-boilerplate exec rake build
+    before_deploy: skip
+    deploy: skip
+    after_success: skip
+    after_deploy: skip
+
+  # Build the blog as GithHub Page
+  - stage: deploy as gh-page
+    env:
+      - PROJECT=$(basename $TRAVIS_BUILD_DIR)
+      - JEKYLL_BASEURL=\/$PROJECT
+      - BLOG_DEPLOY_TEST_URL=https://nolte.github.io/jekyll-boilerplate/
+      - GITHUB_PAGE_DIR=/tmp/ghpage
+    deploy:
+      # only executed on master branch
+      - provider: script
+        script: $TRAVISCI_SCRIPT_DIR/deploy_ghpage.sh
