@@ -61,7 +61,7 @@ sass:
 
 permalink: /blog/:year/:month/:day/:title/
 
-disqus_short_name: nolte-jekyll-site
+disqus_short_name: blog-noltarium-de
 
 
 timezone: UTC
