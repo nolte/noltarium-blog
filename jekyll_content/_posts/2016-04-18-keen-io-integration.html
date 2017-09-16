@@ -1,0 +1,64 @@
+---
+layout: site/post
+title:  "Keen.io integration"
+date:   2016-07-18 12:31:11
+categories: jekyll ci iot
+comments: true
+scripts:
+  - site/js/keenio-blog-posts-scripts.html
+---
+
+<p>
+  <a href="https://keen.io">Keen.io</a> dient als Analytics Service, zum aufzeichnen der anfallenden Daten.</p>
+<ul>
+  <li><a href="https://developers.google.com/chart/interactive/docs/gallery/barchart#examples">Google Charts JS</a></li>
+  <li><a href="https://keen.io">keen.io</a></li>
+</ul>
+
+<!--more-->
+
+<h1>Analysieren von Git Commits</h1>
+
+<p>
+  Auf GitHub wurden Webhooks eingerichtet, das bei jeden <code>git push</code> die Daten nach <a href="https://keen.io">Keen.io</a> publiziert.
+</p>
+
+{% ditaa %} {% include /images/git-keen-commit-hook.ditaa %} {% endditaa %}
+
+<p>Der Webhook für alle <code>git push</code> Events geht an folgende url:</p>
+<pre>
+<code>
+  https://api.keen.io/3.0/projects/{project}/events/commit?api_key={writeApiKey}
+</code>
+</pre>
+<p>die Payload des Http Request ist unter der <a href="https://developer.github.com/v3/activity/events/types/#pushevent">GitHub Developer Doku</a> beschrieben.</p>
+
+<h2>Push Events</h2>
+
+<div class="row">
+  <div class="col-sm-12">
+    <p>Eine Zählung über alle <code>git push</code> Events.</p>
+    <div class="keen-container" id="git-push-count"></div>
+  </div>
+</div>
+
+<h2>This Site Push Events</h2>
+<p>Eine Zählung über die <code>git push</code> Events, welche dieses Projekt betreffen.</p>
+<div class="row">
+  <div class="col-sm-4">
+    <div class="keen-container" id="git-jekyll-site-branch-push-count"></div>
+  </div>
+  <div class="col-sm-4">
+    <div class="keen-container" id="git-jekyll-site-not-master-push-count"></div>
+  </div>
+  <div class="col-sm-4">
+    <div class="keen-container" id="git-jekyll-site-master-push-count"></div>
+  </div>
+</div>
+
+
+<h2>Analysieren von Ci Builds</h2>
+
+<div id="chart"></div>
+
+<div id="chartBuildByBranch"></div>
