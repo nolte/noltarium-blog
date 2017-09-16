@@ -1,0 +1,91 @@
+title: Blog noltarium.de
+email: nolte07@googlemail.com
+description: > # Blog noltarium.de
+baseurl: "" # the subpath of your site, e.g. /blog
+url: "" # the base hostname & protocol for your site, e.g. http://example.com
+github_username:  nolte
+collections:
+  jekyll:
+    output: true
+  posts:
+    output:   true
+  presentation:
+    output:   true
+
+defaults:
+  - scope:
+      path: "_jekyll/elements"
+      type: jekyll
+    values:
+      categories:
+        - 'jekyll'
+        - 'element'
+  - scope:
+      type: presentation
+    values:
+      layout: presentation/presentation
+      categories:
+        - 'jekyll'
+        - 'element'
+
+# Build settings
+markdown: kramdown
+theme: minima
+plugins:
+  - jekyll-feed
+  - bootstrap
+  - jekyll-feed
+  - jekyll-last-modified-at
+  - jemoji
+  - jekyll-sitemap
+  - jekyll-paginate
+  - jekyll-time-to-read
+  - jekyll-archives
+  - jekyll-sass-converter
+  - jekyll-coffeescript
+  - jekyll-tidy
+
+exclude:
+  - Gemfile
+  - Rakefile
+  - Gemfile.lock
+  - vendor
+  - Procfile
+  - Rakefile
+  - config.ru
+  - test
+
+sass:
+    sass_dir: _sass
+
+
+permalink: /blog/:year/:month/:day/:title/
+
+disqus_short_name: blog-noltarium-de
+
+
+timezone: UTC
+paginate: 5          # Posts per page on the blog index
+paginate_path: "blog/posts/:num"  # Directory base for pagination URLs eg. /posts/2/
+recent_posts: 5       # Posts in the sidebar Recent Posts section
+excerpt_link: "Read on &rarr;"  # "Continue reading" link text at the bottom of excerpted articles
+excerpt_separator: "<!--more-->"
+category_dir: /blog/categories
+
+emptyArray: []
+
+ditaa_output_directory: /assets/images/ditaa
+
+jekyll-archives:
+  enabled: all
+  layouts:
+    year: 'site/archive/year-archive'
+    month: 'site/archive/month-archive'
+    day: 'site/archive/day-archive'
+    tag: 'site/archive/tag-archive-layout'
+  permalinks:
+    year: '/blog/:year/'
+    month: '/blog/:year/:month/'
+    day: '/blog/:year/:month/:day/'
+    tag: '/blog/tag/:name/'
+    category: '/blog/categories/:name/'
