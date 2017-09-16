@@ -6,4 +6,3 @@ layout: site/home
 isHome: true
 scripts:
   - site/js/keenio-commit-counter.html
----
