@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <!--
-  gitRevision: 2e95ab8ddf356e5f8f0421e060adf6488a3d8fad
+  gitRevision: 47dafce453befd750ceeb88558fbb67ba6887f5c
   gitBranch: HEAD 
 -->
 <html lang="en">
@@ -8,8 +8,8 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Build Process</title>
-    <meta name="description" content="Commit Ablauf">
+    <title>Keen.io integration</title>
+    <meta name="description" content="Keen.io dient als Analytics Service, zum aufzeichnen der anfallenden Daten. Google Charts JS keen.io">
     <link rel="stylesheet" href="/noltarium-blog/css/site/bootstrap.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/css/tether-theme-arrows.min.css" integrity="sha256-Kk7vb25CCBnA2YrQtZU7RXd1s8gYKKpcZUMncHmHhR4=" crossorigin="anonymous" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/css/tether.min.css" integrity="sha256-y4TDcAD4/j5o4keZvggf698Cr9Oc7JZ+gGMax23qmVA=" crossorigin="anonymous" />
@@ -19,7 +19,7 @@
     <link rel="stylesheet" href="https://cdn.rawgit.com/afeld/bootstrap-toc/v0.4.0/dist/bootstrap-toc.min.css">
     <link href="https://d26b395fwzu5fz.cloudfront.net/4.0.1/keen.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="/noltarium-blog/css/site/styles.css">
-    <link rel="canonical" href="/noltarium-blog/blog/2017/09/02/build-process/">
+    <link rel="canonical" href="/noltarium-blog/blog/2016/07/18/keen-io-integration/">
     <link rel="alternate" type="application/rss+xml" title="Blog noltarium.de" href="/noltarium-blog/feed.xml">
   </head>
   <body>
@@ -52,11 +52,11 @@
               <li class="breadcrumb-item">
                 <a href="/noltarium-blog/blog/">Blog</a>            </li>
               <li class="breadcrumb-item">
-                <a href="/noltarium-blog/blog/2017/">2017</a>            </li>
+                <a href="/noltarium-blog/blog/2016/">2016</a>            </li>
               <li class="breadcrumb-item">
-                <a href="/noltarium-blog/blog/2017/09/">09</a>            </li>
+                <a href="/noltarium-blog/blog/2016/07/">07</a>            </li>
               <li class="breadcrumb-item">
-                <a href="/noltarium-blog/blog/2017/09/02/">02</a>            </li>
+                <a href="/noltarium-blog/blog/2016/07/18/">18</a>            </li>
             </ol>
           </div>
         </div>
@@ -64,15 +64,16 @@
           <div class="col-sm-8" style="padding-right:20px; border-right: 1px solid #ccc;">
             <article class="post">
               <header class="post-header">
-                <h1 data-toc-skip class="title indent">Build Process</h1>
+                <h1 data-toc-skip class="title indent">Keen.io integration</h1>
                 <div class="meta">
-                  <time datetime="2017-09-02T12:31:11+00:00" pubdate><i class="mdi mdi-calendar"></i> September 02, 2017</time>
+                  <time datetime="2016-07-18T12:31:11+00:00" pubdate><i class="mdi mdi-calendar"></i> July 18, 2016</time>
                   <span><i class='mdi mdi-timer'></i> Less than one minute reading time</span>
                   <span>
                     <i class="mdi mdi-tag-multiple"></i>
                     <ul class="tags unstyled">
                       <li><a href ="/noltarium-blog/blog/categories/jekyll">jekyll</a>,</li>
-                      <li><a href ="/noltarium-blog/blog/categories/build">build</a>,</li>
+                      <li><a href ="/noltarium-blog/blog/categories/ci">ci</a>,</li>
+                      <li><a href ="/noltarium-blog/blog/categories/iot">iot</a>,</li>
                     </ul>
                   </span>
                   <i class="mdi mdi-comment-text"></i>
@@ -81,25 +82,48 @@
                 </div>
               </header>
               <div  id = "postContent">
-                <h2 id="commit-ablauf">Commit Ablauf</h2>
-                <p><a href="/noltarium-blog/uml/aee04b6bb4302c85992aa6e34c7e9a74.svg" data-toggle="lightbox"><img src="/noltarium-blog/uml/aee04b6bb4302c85992aa6e34c7e9a74.svg" alt="PlantUML SVG diagram" class="plantuml img-fluid" /></a></p>
+                <p>
+                  <a href="https://keen.io">Keen.io</a> dient als Analytics Service, zum aufzeichnen der anfallenden Daten.</p>
+                <ul>
+                  <li><a href="https://developers.google.com/chart/interactive/docs/gallery/barchart#examples">Google Charts JS</a></li>
+                  <li><a href="https://keen.io">keen.io</a></li>
+                </ul>
                 <a name="read-more"></a>
-                <p>Jeder build wird als Heroku App deployt, dieses dient als “DevStage”.  <br />
-                  Nur der Master wird als <a href="https://pages.github.com/">GitHub Pages</a> im branch <code class="highlighter-rouge">gh-pages</code> publiziert.<br />
-                  Diese Trennung wurde durch die Nutzung von <a href="https://docs.travis-ci.com/user/build-stages/">Travis-ci Built Stages</a> erreicht.  <br />
-                  siehe: <a href="https://travis-ci.org/nolte/jekyll-boilerplate"><img src="https://travis-ci.org/nolte/jekyll-boilerplate.svg?branch=master" alt="Build Status" /></a></p>
-                <h2 id="heroku-container">Heroku Container</h2>
-                <p>Da sich der Blog nicht auf heroku Bauen lässt, durch die Plantuml &amp; Ditaa Abhängigkeiten, werden nur die generierten Dateien nach Heroku übertragen.
-                  Der Blog läuft dann als <a href="https://devcenter.heroku.com/articles/php-support">Heroku PHP App</a>.</p>
-                <h2 id="blog-release">Blog Release</h2>
-                <p><a href="/noltarium-blog/uml/fdd09c7ce5f126f897fb6d557125a510.svg" data-toggle="lightbox"><img src="/noltarium-blog/uml/fdd09c7ce5f126f897fb6d557125a510.svg" alt="PlantUML SVG diagram" class="plantuml img-fluid" /></a></p>
-                <p>Der aktuell aktive <strong>Feature Branch</strong> ist als <a href="https://noltarium-blog-test.herokuapp.com/">Heroku App</a> einsehbar. <br />
-                  Die generierte Blog Version vom <strong>Master Branche</strong> ist unter <a href="https://nolte.github.io/jekyll-boilerplate">github.io</a> zu finden.</p>
-                <p>Sollte man den generierten Blog lokal starten wollen kann ein <a href="https://hub.docker.com/r/nolte/jekyll-boilerplate">Nginx Container</a> verwendet werden.</p>
-                <div class="highlighter-rouge">
-                  <pre class="highlight"><code>  docker run -p 8080:80 nolte/jekyll-boilerplate
-</code></pre>
+                <h1>Analysieren von Git Commits</h1>
+                <p>
+                  Auf GitHub wurden Webhooks eingerichtet, das bei jeden <code>git push</code> die Daten nach <a href="https://keen.io">Keen.io</a> publiziert.
+                </p>
+                <a href="/noltarium-blog/assets/images/ditaa/ditaa-ca68cdaad334d68346281363d3a2dd9f.png" data-toggle="lightbox"><img src="/noltarium-blog/assets/images/ditaa/ditaa-ca68cdaad334d68346281363d3a2dd9f.png" class="img-fluid" alt="ditaa-ca68cdaad334d68346281363d3a2dd9f.png"></a>
+                <p>Der Webhook für alle <code>git push</code> Events geht an folgende url:</p>
+                <pre>
+<code>
+  https://api.keen.io/3.0/projects/{project}/events/commit?api_key={writeApiKey}
+</code>
+</pre>
+                <p>die Payload des Http Request ist unter der <a href="https://developer.github.com/v3/activity/events/types/#pushevent">GitHub Developer Doku</a> beschrieben.</p>
+                <h2>Push Events</h2>
+                <div class="row">
+                  <div class="col-sm-12">
+                    <p>Eine Zählung über alle <code>git push</code> Events.</p>
+                    <div class="keen-container" id="git-push-count"></div>
+                  </div>
                 </div>
+                <h2>This Site Push Events</h2>
+                <p>Eine Zählung über die <code>git push</code> Events, welche dieses Projekt betreffen.</p>
+                <div class="row">
+                  <div class="col-sm-4">
+                    <div class="keen-container" id="git-jekyll-site-branch-push-count"></div>
+                  </div>
+                  <div class="col-sm-4">
+                    <div class="keen-container" id="git-jekyll-site-not-master-push-count"></div>
+                  </div>
+                  <div class="col-sm-4">
+                    <div class="keen-container" id="git-jekyll-site-master-push-count"></div>
+                  </div>
+                </div>
+                <h2>Analysieren von Ci Builds</h2>
+                <div id="chart"></div>
+                <div id="chartBuildByBranch"></div>
               </div>
             </article>
           </div>
@@ -115,7 +139,7 @@
                 /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
                 var disqus_shortname = 'blog-noltarium-de'; // required: replace example with your forum shortname
                 var disqus_developer = 1; // Comment out when the site is live
-                var disqus_identifier = "/blog/2017/09/02/build-process/";
+                var disqus_identifier = "/blog/2016/07/18/keen-io-integration/";
                 
                 /* * * DON'T EDIT BELOW THIS LINE * * */
                 (function() {
@@ -166,6 +190,135 @@
         $(document).on('click', '[data-toggle="lightbox"]', function(event) {
             event.preventDefault();
             $(this).ekkoLightbox();
+        });
+      </script>
+      <script>
+        $(document).ready(function() {
+        
+          var client = new Keen({
+            projectId: "578d609a80a7bd79bfd6cb0a",
+            readKey: "2c8b72bf508f6343758403cc99066b7bdc30aa6ae89a70873e263e33981d3b4e750140761d5a1600c49b752b4fc119c051c72ee036d4b770b7ae1a4f203829934cfc50b9066b752ec4d2871039e59252e147e9876e1a6ae86fc8111766988662"
+          });
+        
+          Keen.ready(function() {
+            var el = document.getElementById("git-jekyll-site-master-push-count");
+            var chart = new Keen.Dataviz()
+              .el(el)
+              .chartType('metric')
+              .title('on Master Last (14d)')
+              .prepare();
+        
+            client
+              .query("count", {
+                event_collection: "commit",
+                filters: [{
+                    "operator": "eq",
+                    "property_name": "repository.id",
+                    "property_value": 103748176
+                  },
+                  {
+                    "operator": "eq",
+                    "property_name": "ref",
+                    "property_value": "refs/heads/master"
+                  }
+                ],
+                timeframe: "this_14_days",
+                timezone: "Europe/Paris"
+              })
+              .then(function(res) {
+                chart.data(res).render();
+              })
+              .catch(function(err) {
+                chart.message(err.message);
+              });
+        
+          });
+        
+          Keen.ready(function() {
+            var el = document.getElementById("git-jekyll-site-not-master-push-count");
+            var chart = new Keen.Dataviz()
+              .el(el)
+              .chartType('metric')
+              .title('other commits Last (14d)')
+              .prepare();
+        
+            client
+              .query("count", {
+                event_collection: "commit",
+                filters: [{
+                    "operator": "eq",
+                    "property_name": "repository.id",
+                    "property_value": 103748176
+                  },
+                  {
+                    "operator": "ne",
+                    "property_name": "ref",
+                    "property_value": "refs/heads/master"
+                  }
+                ],
+                timeframe: "this_14_days",
+                timezone: "Europe/Paris"
+              })
+              .then(function(res) {
+                chart.data(res).render();
+              })
+              .catch(function(err) {
+                chart.message(err.message);
+              });
+        
+          });
+          Keen.ready(function() {
+            var el = document.getElementById("git-push-count");
+            var chart = new Keen.Dataviz()
+              .el(el)
+              .chartType('metric')
+              .title('all pushs Last (14d)')
+              .prepare();
+        
+            client
+              .query("count", {
+                event_collection: "commit",
+                timeframe: "this_14_days",
+                timezone: "Europe/Paris"
+              })
+              .then(function(res) {
+                chart.data(res).render();
+              })
+              .catch(function(err) {
+                chart.message(err.message);
+              });
+        
+          });
+        
+          Keen.ready(function() {
+            var el = document.getElementById("git-jekyll-site-branch-push-count");
+            var chart = new Keen.Dataviz()
+              .el(el)
+              .chartType('metric')
+              .title('Active Branches Last (14d)')
+              .prepare();
+        
+            client
+              .query("count_unique", {
+                event_collection: "commit",
+                filters: [{
+                  "operator": "eq",
+                  "property_name": "repository.id",
+                  "property_value": 103748176
+                }],
+                target_property: "ref",
+                timeframe: "this_14_years",
+                timezone: "UTC"
+              })
+              .then(function(res) {
+                chart.data(res).render();
+              })
+              .catch(function(err) {
+                chart.message(err.message);
+              });
+        
+          });
+        
         });
       </script>
     </body>

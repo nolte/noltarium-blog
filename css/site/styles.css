@@ -28,6 +28,8 @@ display: inline;
 padding-left: 0; }
 .unstyled > li {
 display: inline; }
+.keen-container {
+padding-bottom: 10px; }
 nav[data-toggle='toc'] {
 margin-top: 30px; }
 nav[data-toggle='toc'] ul {
