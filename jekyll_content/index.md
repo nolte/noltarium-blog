@@ -4,4 +4,6 @@
 # See: https://jekyllrb.com/docs/themes/#overriding-theme-defaults
 layout: site/home
 isHome: true
+scripts:
+  - site/js/keenio-commit-counter.html
 ---

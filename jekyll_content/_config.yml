@@ -28,6 +28,10 @@ defaults:
         - 'jekyll'
         - 'element'
 
+keen_api_readKey: 2c8b72bf508f6343758403cc99066b7bdc30aa6ae89a70873e263e33981d3b4e750140761d5a1600c49b752b4fc119c051c72ee036d4b770b7ae1a4f203829934cfc50b9066b752ec4d2871039e59252e147e9876e1a6ae86fc8111766988662
+keen_projectId: 578d609a80a7bd79bfd6cb0a
+keen_github_project_id: 103748176
+
 # Build settings
 markdown: kramdown
 theme: minima

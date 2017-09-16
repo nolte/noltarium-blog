@@ -2,7 +2,7 @@
 
 [![Build Status](https://travis-ci.org/nolte/noltarium-blog.svg?branch=master)](https://travis-ci.org/nolte/noltarium-blog)
 
-develop version on https://noltarium-blog-development.herokuapp.com
+develop version on https://noltarium-blog-development.herokuapp.com   
 master version on https://nolte.github.io/noltarium-blog   
 
 [Slack](https://slack.com) Activity Channel: [#publicbuilds](https://noltarium.slack.com/messages/C156TTDD4/)
