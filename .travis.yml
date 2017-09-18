@@ -45,6 +45,7 @@ after_deploy:
   - bundle exec rake test
 
 notifications:
+  webhooks: https://keenio-gateway.herokuapp.com/build
   slack:
     secure: "lPqWfuGviSb0qKl8XTDWRJ90+2Ha949W5NZ/nR3xAzamoHNOjSeoOwJi+YA0n/45Tf4xw+1SmrszIUTPgKckX/b/8hPOwu/VKoxLt77BbZKZizPCklVFCAnuBNuzBXiukl/5z8Dvz5kJipNJWQAK+emkn4HjdHUIGzsqnrSW9gvg0fdUGBndgliquKOZ3MXDsCD0BVBQYSZsqNIvL3JpNbY6mA3ieP8CnKtajx8CrTSEbD6aMg4eaU3/0jtZw/eBsAkw6GvRENt2lLWhgEz3hVZbR3gw6O1hlHz8jqn/3C4yBUjpHxXISMLrU06tlFMeIJBPRFikK/DvyU1RJWM/lNKPEFtJXcFKfduMmbNngHZbjQTsy37MrGDn2FYbSu0V5vp8s+oqZUOq2bFTBn7XdfdaDUAo7QT662Sob12bbjlai/FRigndD7Ga6Os20mFGoVwkyiJ3wXNvEeAzzVjAjVs1MfYHXAaX1V5zIk0w5ki/yCXdOFQJVAp0wDMkBUdGrtff2CGUQhNKkz61DbogTvAZ7Ih3aqYckMQ1cRy06ipRwO+sEh2OgCujQSZ+f/s6NCtRm3tkpJdhQ25xL2r0Fn+wln+oHyw+o4NeLjpvPhnpo4a/laWAyFs0Ye1bTzUw79MnboUM+NHq12yZUQeoD6nkYRUVPRghN95IHXi/Ny4="
 jobs:
@@ -61,7 +62,7 @@ jobs:
     deploy:
       - provider: heroku
         api_key:
-          secure: "nCX7HrSpa0EIlp5nHy+tvgmAIONAmJL7oTwLBoUA2PeGJXW79nwC8ZaKgNYKTwHKSekP8U+rdiKXV9ZnPmzQpWHnaIGBbBtxMghudykrhj+uyPdDi2VxGFkzqq7rasuCFg3gJVoPF5vIEB2ylPHgQfUnhEJPZkXcYfTO+64saeNJSjsJTbdl9WbeGg/T7oy/Zw1Ud2oiaEYFn/disRa/7CTM/nG86sCPlkuPTM0ZcrJPWD5OGYoWMzdg8fZtBiej3U4ITAF0Xq6kdiYd9o9P9d2TvW2GW4OVzX5uhp5ltthgT+ECo7WCtJuNE8+OC8OpNANbgYriO4tB12r7WsjDsUDHLGQOcEoTRz0B6MQGQfMFVCkOoomQUYYxfyClENIqEU7Jjv8IrbVXKQT7uXlinQn2OhwRH1+sUoeSbsr0EaJphzMS4wvfCLtcZGMGLa5MRQy0lvZM6wXQtR/Fb5wGB6Fqq/gRO11j6d4tHl5bvQw2lIMQ7rv7q1rWJMGQBwD3qaTZ1NJGWRT0jJdwdVWxh5XMHl0qRORtvayP0lucWAIA4Pi1Ngyh+JEUvl//IrbK4uOZDWzuOE4+RFJgaKQ4ZwKSXsqu0e1jh0h0g5VBRj+afDhewfEsYS0YIdhsDJ6mKX0pR+pexhdRkcWZzmM4z4ZPB87udidvKGHBSroxezM="
+          secure: "PXnLVdhE7wL+3UmtOMcV8luBflfTawmCTxCKCMHb3JY4Zlku6OmhuPSBI/Ork/bro1ThGAYI6/GowsKrTwiC/hwSYlRy15+ST1+sWLCISZM0qu5M0Y9g6OTKlkarL7wcQD6wL6B67gcce9E8lRsx3p9tD7a+jKpUl4EF/v907zgHhDCQ1XO0LVQTf2XEd7X0A05AMiCyIbz3JFRDHGwj1LkqIcjEPge1KAhn2BjNTaIdTJq5lkN5bq6aHxx1w6HCZriEgsJaZh1h6b6RTBL/PJ7D+32Ezn+P/cPeUBAfUK9J0Ka5dZGgEFkMFW+LmAg6oAcnBlf6Eax1W2jSy8rpEOVelXUvc7ebF7hMMJrTlg/2728aywXgGEPzCE5S0gI4WD8REoxyNQ9x8bw1c+EtnK1jDz6Lp5AUv9c5ZXAiIA+kPhL+6hA8q4gxRueX5kDou/i/kVrfFSAc5VriKYoce0R3O8P7D0bdAuWiFammSRGnAFIIK7spghywrSWuE+sJ513y3VmfPtBFkEEpIh0f0hfiS1kpywj5xPLj0O6OANGUwvchKqJaHAIGwrgST79bJsZScSUJvWQaYLv3hgtfKVCEyd/g1GxGg0bI/YOp62XliOO+l7byHGkE/wTXeSAgdJ5pkDisiSJ4znboeUuTEgAtVLxNyYz0gjnG0gxOxNM="
         app: $HEROKU_APP_NAME
         on:
           all_branches: true
