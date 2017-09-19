@@ -1,0 +1,63 @@
+<script>
+  $(document).ready(function() {
+
+    var client = new Keen({
+      projectId: "{{ site.keen_projectId }}",
+      readKey: "{{ site.keen_api_readKey }}"
+    });
+    Keen.ready(function() {
+      var chart = new Keen.Dataviz()
+        .el("#chart")
+        .height(240)
+        .title("git-push-project-count-by-language")
+        .type("barchart")
+        .prepare();
+
+      client
+        .query("count_unique", {
+          event_collection: "commit",
+          group_by: ["repository.language"],
+          target_property: "repository.name",
+          timeframe: "this_14_years",
+          timezone: "UTC"
+        })
+        .then(function(res) {
+          chart.data(res).render();
+        })
+        .catch(function(err) {
+          chart.message(err.message);
+        });
+
+    });
+    Keen.ready(function() {
+      var chart = new Keen.Dataviz()
+        .el("#projects")
+        .height(240)
+        .title("git-push-language-group")
+        .type("table")
+        .prepare();
+
+      client
+        .query("count", {
+          event_collection: "commit",
+          group_by: ["repository.language", "repository.name"],
+          timeframe: "this_14_years",
+          timezone: "UTC"
+        })
+        .then(function(res) {
+          chart.data(res);
+          chart.call(function() {
+              // Sort and filter results before rendering
+              this.dataset.sortRows("desc", function(row) {
+                return row[1];
+              });
+            })
+            .render();
+        })
+        .catch(function(err) {
+          chart.message(err.message);
+        });
+
+    });
+  });
+</script>
