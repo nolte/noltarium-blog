@@ -58,6 +58,24 @@ scripts:
   </div>
 </div>
 
+<h2>Analysieren von TravisCI Builds</h2>
+<p>Auswerten der Travis CI Builds</p>
+<div class="row">
+  <div class="col-sm-4">
+    <div class="keen-container" id="travisci-projects-count_unique"></div>
+  </div>
+  <div class="col-sm-4">
+    <div class="keen-container" id="travisci-projects-sum-duration"></div>
+  </div>
+
+
+</div>
+<div class="row">
+  <div class="col-sm-12">
+    <div class="keen-container" id="travisci-projects-duration"></div>
+  </div>
+</div>
+
 <h2>Analysieren von Docker Images</h2>
 <p>Sollten images gepusht werden so läuft ein <a href="https://docs.docker.com/docker-hub/webhooks/">Webhook</a> auf Docker Hub los,
   und publiziert die Imagedaten nach keenio. Dort werden die Daten in der collection <code>dockerhub</code> gesammelt</p>
@@ -72,4 +90,6 @@ scripts:
   <div class="col-sm-4">
     <div class="keen-container" id="docker-push-count-presentation"></div>
   </div>
+
+
 </div>

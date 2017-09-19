@@ -198,6 +198,94 @@
         });
 
     });
+    Keen.ready(function() {
+      var el = document.getElementById("travisci-projects-count_unique");
+      var chart = new Keen.Dataviz()
+        .el(el)
+        .chartType('metric')
+        .title('Active Travis CI Projects (14d)')
+        .prepare();
+
+      client
+        .query("count_unique", {
+          event_collection: "travisci",
+          target_property: "repository.name",
+          timeframe: "this_14_years",
+          timezone: "UTC"
+        })
+        .then(function(res) {
+          chart.data(res).render();
+        })
+        .catch(function(err) {
+          chart.message(err.message);
+        });
+
+    });
+    Keen.ready(function() {
+      var el = document.getElementById("travisci-projects-sum-duration");
+      var chart = new Keen.Dataviz()
+        .el(el)
+        .chartType('metric')
+        .title('Verbrauchte Build Zeit (14d)')
+        .prepare();
+
+
+      client
+        .query("sum", {
+          event_collection: "travisci",
+          target_property: "duration",
+          timeframe: "this_14_years",
+          timezone: "UTC"
+        })
+        .then(function(res) {
+
+          chart.data(res);
+          //chart.parseRawData({ result: res });
+          chart.call(function(){
+            // Modify internal Dataset instance
+            this.dataset.updateColumn(1, function(value, index, column){
+              // Divide each value in column 1 by 100
+              console.log("foo"+value);
+
+              return value / 60 / 60;
+            });
+          })
+          .render();
+        })
+        .catch(function(err) {
+          chart.message(err.message);
+        });
+
+
+
+    });
+    Keen.ready(function() {
+      var el = document.getElementById("travisci-projects-duration");
+      var chart = new Keen.Dataviz()
+        .el(el)
+        .chartType('linechart')
+        .title('Project Build Zeit in Sec (14d)')
+        .prepare();
+
+      client
+        .query("average", {
+            event_collection: "travisci",
+            group_by: ["repository.name"],
+            interval: "daily",
+            target_property: "duration",
+            timeframe: "this_14_days",
+            timezone: "Europe/Paris"
+        })
+        .then(function(res) {
+          chart.data(res).render();
+        })
+        .catch(function(err) {
+          chart.message(err.message);
+        });
+
+    });
+
+
 
   });
 </script>
