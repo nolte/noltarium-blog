@@ -32,7 +32,9 @@ scripts:
 </code>
 </pre>
 <p>die Payload des Http Request ist unter der <a href="https://developer.github.com/v3/activity/events/types/#pushevent">GitHub Developer Doku</a> beschrieben.</p>
-
+<div class="alert alert-info" role="alert">
+  :information_source: für das verwalten von Github Hooks giebt es eine gute <a href="https://docs.ansible.com/ansible/latest/github_hooks_module.html">Ansible Integration</a>.
+</div>
 <h2>Push Events</h2>
 
 <div class="row">
@@ -56,9 +58,18 @@ scripts:
   </div>
 </div>
 
+<h2>Analysieren von Docker Images</h2>
+<p>Sollten images gepusht werden so läuft ein <a href="https://docs.docker.com/docker-hub/webhooks/">Webhook</a> auf Docker Hub los,
+  und publiziert die Imagedaten nach keenio. Dort werden die Daten in der collection <code>dockerhub</code> gesammelt</p>
 
-<h2>Analysieren von Ci Builds</h2>
-
-<div id="chart"></div>
-
-<div id="chartBuildByBranch"></div>
+<div class="row">
+  <div class="col-sm-4">
+    <div class="keen-container" id="docker-push-count"></div>
+  </div>
+  <div class="col-sm-4">
+    <div class="keen-container" id="docker-push-count-unique"></div>
+  </div>
+  <div class="col-sm-4">
+    <div class="keen-container" id="docker-push-count-presentation"></div>
+  </div>
+</div>
