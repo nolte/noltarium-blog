@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.5.2">Jekyll</generator><link href="/noltarium-blog/feed.xml" rel="self" type="application/atom+xml" /><link href="/noltarium-blog/" rel="alternate" type="text/html" /><updated>2017-09-18T18:37:56+00:00</updated><id>/noltarium-blog/</id><title type="html">Blog noltarium.de</title><subtitle></subtitle><entry><title type="html">How To Fork</title><link href="/noltarium-blog/blog/2017/09/02/how-to-fork/" rel="alternate" type="text/html" title="How To Fork" /><published>2017-09-02T12:31:11+00:00</published><updated>2017-09-16T13:25:19+00:00</updated><id>/noltarium-blog/blog/2017/09/02/how-to-fork</id><content type="html" xml:base="/noltarium-blog/blog/2017/09/02/how-to-fork/">&lt;p&gt;&lt;a href=&quot;/noltarium-blog/uml/9ceb20472f854617547233dcc2fb9c27.svg&quot; data-toggle=&quot;lightbox&quot;&gt;&lt;img src=&quot;/noltarium-blog/uml/9ceb20472f854617547233dcc2fb9c27.svg&quot; alt=&quot;PlantUML SVG diagram&quot; class=&quot;plantuml img-fluid&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.5.2">Jekyll</generator><link href="/noltarium-blog/feed.xml" rel="self" type="application/atom+xml" /><link href="/noltarium-blog/" rel="alternate" type="text/html" /><updated>2017-09-26T17:52:21+00:00</updated><id>/noltarium-blog/</id><title type="html">Blog noltarium.de</title><subtitle></subtitle><entry><title type="html">How To Fork</title><link href="/noltarium-blog/blog/2017/09/02/how-to-fork/" rel="alternate" type="text/html" title="How To Fork" /><published>2017-09-02T12:31:11+00:00</published><updated>2017-09-16T13:25:19+00:00</updated><id>/noltarium-blog/blog/2017/09/02/how-to-fork</id><content type="html" xml:base="/noltarium-blog/blog/2017/09/02/how-to-fork/">&lt;p&gt;&lt;a href=&quot;/noltarium-blog/uml/9ceb20472f854617547233dcc2fb9c27.svg&quot; data-toggle=&quot;lightbox&quot;&gt;&lt;img src=&quot;/noltarium-blog/uml/9ceb20472f854617547233dcc2fb9c27.svg&quot; alt=&quot;PlantUML SVG diagram&quot; class=&quot;plantuml img-fluid&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
         &lt;!--more--&gt;
         &lt;h2 id=&quot;externe-systeme&quot;&gt;Externe Systeme&lt;/h2&gt;
         &lt;p&gt;Der Build Prozess und die Interaktion mit den externen Systemen wird über die  &lt;code class=&quot;highlighter-rouge&quot;&gt;.travis.yml&lt;/code&gt; konfiguriert.&lt;/p&gt;
@@ -139,7 +139,7 @@
         &lt;/tbody&gt;
         &lt;/table&gt;
         &lt;h2 id=&quot;presentation-struktur&quot;&gt;Presentation Struktur&lt;/h2&gt;
-        &lt;p&gt;&lt;a href=&quot;/noltarium-blog/uml/7970b98157580791cd0945848db0fc9f.svg&quot; data-toggle=&quot;lightbox&quot;&gt;&lt;img src=&quot;/noltarium-blog/uml/7970b98157580791cd0945848db0fc9f.svg&quot; alt=&quot;PlantUML SVG diagram&quot; class=&quot;plantuml img-fluid&quot; /&gt;&lt;/a&gt;&lt;/p&gt;</content><author><name></name></author><summary type="html">Ein neues “Kopier” Projekt für jekyll Blogs. :+1: zusätzlich zu dem Klassischen Bootstrap Layout wird eine reveal.js Modus angeboten. Reveal.js wird verwendet um einfache und moderne Präsentationen zu erstellen.</summary></entry><entry><title type="html">Keen.io integration</title><link href="/noltarium-blog/blog/2016/07/18/keen-io-integration/" rel="alternate" type="text/html" title="Keen.io integration" /><published>2016-07-18T12:31:11+00:00</published><updated>2017-09-16T19:23:58+00:00</updated><id>/noltarium-blog/blog/2016/07/18/keen-io-integration</id><content type="html" xml:base="/noltarium-blog/blog/2016/07/18/keen-io-integration/">&lt;p&gt;
+        &lt;p&gt;&lt;a href=&quot;/noltarium-blog/uml/7970b98157580791cd0945848db0fc9f.svg&quot; data-toggle=&quot;lightbox&quot;&gt;&lt;img src=&quot;/noltarium-blog/uml/7970b98157580791cd0945848db0fc9f.svg&quot; alt=&quot;PlantUML SVG diagram&quot; class=&quot;plantuml img-fluid&quot; /&gt;&lt;/a&gt;&lt;/p&gt;</content><author><name></name></author><summary type="html">Ein neues “Kopier” Projekt für jekyll Blogs. :+1: zusätzlich zu dem Klassischen Bootstrap Layout wird eine reveal.js Modus angeboten. Reveal.js wird verwendet um einfache und moderne Präsentationen zu erstellen.</summary></entry><entry><title type="html">Keen.io integration</title><link href="/noltarium-blog/blog/2016/07/18/keen-io-integration/" rel="alternate" type="text/html" title="Keen.io integration" /><published>2016-07-18T12:31:11+00:00</published><updated>2017-09-26T17:45:13+00:00</updated><id>/noltarium-blog/blog/2016/07/18/keen-io-integration</id><content type="html" xml:base="/noltarium-blog/blog/2016/07/18/keen-io-integration/">&lt;p&gt;
         &lt;a href=&quot;https://keen.io&quot;&gt;Keen.io&lt;/a&gt; dient als Analytics Service, zum aufzeichnen der anfallenden Daten.&lt;/p&gt;
         &lt;ul&gt;
         &lt;li&gt;&lt;a href=&quot;https://developers.google.com/chart/interactive/docs/gallery/barchart#examples&quot;&gt;Google Charts JS&lt;/a&gt;&lt;/li&gt;
@@ -158,6 +158,9 @@
         &lt;/code&gt;
         &lt;/pre&gt;
         &lt;p&gt;die Payload des Http Request ist unter der &lt;a href=&quot;https://developer.github.com/v3/activity/events/types/#pushevent&quot;&gt;GitHub Developer Doku&lt;/a&gt; beschrieben.&lt;/p&gt;
+        &lt;div class=&quot;alert alert-info&quot; role=&quot;alert&quot;&gt;
+        :information_source: für das verwalten von Github Hooks giebt es eine gute &lt;a href=&quot;https://docs.ansible.com/ansible/latest/github_hooks_module.html&quot;&gt;Ansible Integration&lt;/a&gt;.
+        &lt;/div&gt;
         &lt;h2&gt;Push Events&lt;/h2&gt;
         &lt;div class=&quot;row&quot;&gt;
         &lt;div class=&quot;col-sm-12&quot;&gt;
@@ -178,6 +181,17 @@
         &lt;div class=&quot;keen-container&quot; id=&quot;git-jekyll-site-master-push-count&quot;&gt;&lt;/div&gt;
         &lt;/div&gt;
         &lt;/div&gt;
-        &lt;h2&gt;Analysieren von Ci Builds&lt;/h2&gt;
-        &lt;div id=&quot;chart&quot;&gt;&lt;/div&gt;
-        &lt;div id=&quot;chartBuildByBranch&quot;&gt;&lt;/div&gt;</content><author><name></name></author><summary type="html">Keen.io dient als Analytics Service, zum aufzeichnen der anfallenden Daten. Google Charts JS keen.io</summary></entry></feed>
+        &lt;h2&gt;Analysieren von Docker Images&lt;/h2&gt;
+        &lt;p&gt;Sollten images gepusht werden so läuft ein &lt;a href=&quot;https://docs.docker.com/docker-hub/webhooks/&quot;&gt;Webhook&lt;/a&gt; auf Docker Hub los,
+        und publiziert die Imagedaten nach keenio. Dort werden die Daten in der collection &lt;code&gt;dockerhub&lt;/code&gt; gesammelt&lt;/p&gt;
+        &lt;div class=&quot;row&quot;&gt;
+        &lt;div class=&quot;col-sm-4&quot;&gt;
+        &lt;div class=&quot;keen-container&quot; id=&quot;docker-push-count&quot;&gt;&lt;/div&gt;
+        &lt;/div&gt;
+        &lt;div class=&quot;col-sm-4&quot;&gt;
+        &lt;div class=&quot;keen-container&quot; id=&quot;docker-push-count-unique&quot;&gt;&lt;/div&gt;
+        &lt;/div&gt;
+        &lt;div class=&quot;col-sm-4&quot;&gt;
+        &lt;div class=&quot;keen-container&quot; id=&quot;docker-push-count-presentation&quot;&gt;&lt;/div&gt;
+        &lt;/div&gt;
+        &lt;/div&gt;</content><author><name></name></author><summary type="html">Keen.io dient als Analytics Service, zum aufzeichnen der anfallenden Daten. Google Charts JS keen.io</summary></entry></feed>
