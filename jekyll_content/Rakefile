@@ -59,7 +59,6 @@ task :html_proofer do
   url_ignore = []
   # ssl check fail on travisci
 
-
   opts = { log_level: ':debug',
            url_swap: url_swap,
            #url_ignore: url_ignore,
