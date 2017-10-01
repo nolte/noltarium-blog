@@ -32,7 +32,7 @@ plantuml:
   url: http://plantuml.com/
   description: Markdown to UML Diagramm
 cheatsheets:
-  url: http://ricostacruz.com/cheatsheets/
+  url: https://devhints.io/
   description: cheatsheets collection
 microbadger:
   url: https://microbadger.com
