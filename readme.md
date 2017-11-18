@@ -1,6 +1,7 @@
 # My blog
 
 [![Build Status](https://travis-ci.org/nolte/noltarium-blog.svg?branch=master)](https://travis-ci.org/nolte/noltarium-blog)
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fnolte%2Fnoltarium-blog.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2Fnolte%2Fnoltarium-blog?ref=badge_shield)
 
 
 develop version on https://noltarium-blog-development.herokuapp.com   
@@ -32,3 +33,7 @@ docker-compose up --build
 ## Technical Base
 
 https://github.com/nolte/jekyll-boilerplate
+
+
+## License
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fnolte%2Fnoltarium-blog.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2Fnolte%2Fnoltarium-blog?ref=badge_large)
